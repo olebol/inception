@@ -9,12 +9,12 @@ build:
 	docker compose -f $(COMPOSE_PATH) build
 
 stop:
-	docker compose down
+	docker compose -f $(COMPOSE_PATH) down
 
 ps:
-	docker compose ps
+	docker compose -f $(COMPOSE_PATH) ps
 
 logs:
-	docker compose logs
+	docker compose -f $(COMPOSE_PATH) logs
 
 .PHONY: all start build stop ps logs
