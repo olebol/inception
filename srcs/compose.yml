@@ -1,0 +1,67 @@
+name: inception
+
+services:
+  mariadb:
+    container_name: mariadb
+
+    env_file: .env
+    restart: always
+    networks:
+      - default
+
+    image: mariadb:latest # not allowed?
+    # build: requirements/mariadb
+    expose:
+      - "3306"
+    volumes:
+      - mariadb
+
+
+  wordpress:
+    container_name: wordpress
+    depends_on:
+      - mariadb
+
+    restart: always
+    networks:
+      - default
+
+    image: wordpress:latest # not allowed?
+    # build: requirements/wordpress
+    expose:
+      - "9000"
+    volumes:
+      - wordpress
+
+
+  nginx:
+    container_name: nginx
+    depends_on:
+      - wordpress
+
+    restart: always
+    networks:
+      - default
+
+    image: nginx:latest # not allowed?
+    # build: requirements/nginx
+    expose:
+      - "443"
+    volumes:
+      - nginx:ro # ro for read only?
+
+
+
+networks:
+  default:
+    # idk
+
+
+
+volumes:
+  mariadb:
+    # idk
+  wordpress:
+    # idk
+  nginx:
+    # idk
