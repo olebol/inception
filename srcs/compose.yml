@@ -9,12 +9,12 @@ services:
     networks:
       - default
 
-    image: mariadb:latest # not allowed?
+    image: mariadb
     # build: requirements/mariadb
     expose:
       - "3306"
-    volumes:
-      - mariadb
+    # volumes:
+    #   - mariadb
 
 
   wordpress:
@@ -26,12 +26,12 @@ services:
     networks:
       - default
 
-    image: wordpress:latest # not allowed?
+    image: wordpress
     # build: requirements/wordpress
     expose:
       - "9000"
-    volumes:
-      - wordpress
+    # volumes:
+    #   - wordpress
 
 
   nginx:
@@ -43,12 +43,12 @@ services:
     networks:
       - default
 
-    image: nginx:latest # not allowed?
+    image: nginx
     # build: requirements/nginx
     expose:
       - "443"
-    volumes:
-      - nginx:ro # ro for read only?
+    # volumes:
+    #   - nginx:ro # ro for read only?
 
 
 
