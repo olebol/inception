@@ -54,7 +54,7 @@ services:
 
 networks:
   default:
-    # idk
+    name: inception-network
 
 
 
