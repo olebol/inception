@@ -1,14 +1,14 @@
 COMPOSE_PATH		:=	srcs/compose.yml
 
-all: start
+all: up
 
-start: build
+up: build
 	docker compose -f $(COMPOSE_PATH) up -d
 
 build:
 	docker compose -f $(COMPOSE_PATH) build
 
-stop:
+down:
 	docker compose -f $(COMPOSE_PATH) down
 
 ps:
@@ -17,4 +17,6 @@ ps:
 logs:
 	docker compose -f $(COMPOSE_PATH) logs
 
-.PHONY: all start build stop ps logs
+re: down up
+
+.PHONY: all up build down ps logs re
