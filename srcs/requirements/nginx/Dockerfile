@@ -18,4 +18,5 @@ RUN 	mkdir -p /data/www &&			\
 COPY 	index.html						\
 		/data/www/
 
+# Make nginx run in the foreground to keep the container running
 CMD 	[ "nginx", "-g", "daemon off;" ]
