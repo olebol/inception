@@ -1,35 +1,41 @@
 name: inception
 
 
+
 services:
   mariadb:
     container_name: mariadb
     env_file: .env
+
+    build: requirements/mariadb
     restart: always
     networks:
       - default
-    build: requirements/mariadb
+
 
   wordpress:
     container_name: wordpress
     depends_on:
       - mariadb
+
+    build: requirements/wordpress
     restart: always
     networks:
       - default
-    build: requirements/wordpress
+
 
   nginx:
     container_name: nginx
     depends_on:
       - wordpress
+
+    build: requirements/nginx
     restart: always
     networks:
       - default
-    build: requirements/nginx
     ports:
       - "8443:443"
-      - "8080:80"
+
 
 
 networks:
