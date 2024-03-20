@@ -9,7 +9,7 @@ build:
 	docker compose -f $(COMPOSE_PATH) build
 
 down:
-	docker compose -f $(COMPOSE_PATH) down
+	docker compose -f $(COMPOSE_PATH) down --volumes --remove-orphans
 
 ps:
 	docker compose -f $(COMPOSE_PATH) ps
