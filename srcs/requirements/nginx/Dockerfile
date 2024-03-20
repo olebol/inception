@@ -3,8 +3,8 @@ FROM	debian:oldstable
 EXPOSE	443
 
 # Install nginx
-RUN 	apt update -y &&			\
-		apt install -y nginx &&		\
+RUN 	apt update -y &&				\
+		apt install -y nginx &&			\
 		apt install -y openssl
 
 # Copy the config file
@@ -30,4 +30,4 @@ RUN 	openssl req												\
 			-out		"/etc/ssl/certs/nginx-selfsigned.crt"
 
 # Make nginx run in the foreground to keep the container running
-CMD 	[ "nginx", "-g", "daemon off;" ]
+ENTRYPOINT 	[ "nginx", "-g", "daemon off;" ]
