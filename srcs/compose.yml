@@ -3,31 +3,33 @@ name: inception
 
 
 services:
-  mariadb:
-    container_name: mariadb
-    env_file: .env
+  # mariadb:
+  #   container_name: mariadb
+  #   env_file: .env
 
-    build: requirements/mariadb
-    restart: always
-    networks:
-      - default
+  #   build: requirements/mariadb
+  #   restart: always
+  #   networks:
+  #     - default
 
 
-  wordpress:
-    container_name: wordpress
-    depends_on:
-      - mariadb
+  # wordpress:
+  #   container_name: wordpress
+  #   # depends_on:
+  #     # - mariadb
 
-    build: requirements/wordpress
-    restart: always
-    networks:
-      - default
+  #   build: requirements/wordpress
+  #   restart: always
+  #   networks:
+  #     - default
+  #   volumes:
+  #     - html:/var/www/html
 
 
   nginx:
     container_name: nginx
-    depends_on:
-      - wordpress
+    # depends_on:
+      # - wordpress
 
     build: requirements/nginx
     restart: always
@@ -35,9 +37,19 @@ services:
       - default
     ports:
       - "8443:443"
+    volumes:
+      - html:/var/www/html
 
 
 
 networks:
   default:
-    name: inception-network
+
+
+
+volumes:
+  html:
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/opelser/Desktop/inception/html
