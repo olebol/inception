@@ -6,8 +6,6 @@ services:
   mariadb:
     container_name: mariadb
     env_file: .env
-    environment:
-      - MARIADB_DATABASE=wordpress
 
     build: requirements/mariadb
     restart: always
@@ -24,9 +22,9 @@ services:
     env_file: .env
     environment:
       - WORDPRESS_DB_HOST=mariadb:3306
+      - WORDPRESS_DB_NAME=$MARIADB_DATABASE
       - WORDPRESS_DB_USER=$MARIADB_USER
       - WORDPRESS_DB_PASSWORD=$MARIADB_PASSWORD
-      - WORDPRESS_DB_NAME=wordpress
 
     build: requirements/wordpress
     restart: always
