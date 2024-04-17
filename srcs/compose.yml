@@ -3,42 +3,54 @@ name: inception
 
 
 services:
-  # mariadb:
-  #   container_name: mariadb
-  #   env_file: .env
+  mariadb:
+    container_name: mariadb
+    env_file: .env
+    environment:
+      - MARIADB_DATABASE=wordpress
 
-  #   build: requirements/mariadb
-  #   restart: always
-  #   networks:
-  #     - default
-
-
-  # wordpress:
-  #   container_name: wordpress
-  #   # depends_on:
-  #     # - mariadb
-
-  #   build: requirements/wordpress
-  #   restart: always
-  #   networks:
-  #     - default
-  #   volumes:
-  #     - html:/var/www/html
-
-
-  nginx:
-    container_name: nginx
-    # depends_on:
-      # - wordpress
-
-    build: requirements/nginx
+    build: requirements/mariadb
     restart: always
     networks:
       - default
-    ports:
-      - "8443:443"
     volumes:
-      - html:/var/www/html
+      - database:/var/lib/mysql
+
+
+  wordpress:
+    container_name: wordpress
+    depends_on:
+      - mariadb
+    env_file: .env
+    environment:
+      - WORDPRESS_DB_HOST=mariadb:3306
+      - WORDPRESS_DB_USER=$MARIADB_USER
+      - WORDPRESS_DB_PASSWORD=$MARIADB_PASSWORD
+      - WORDPRESS_DB_NAME=wordpress
+
+    build: requirements/wordpress
+    restart: always
+    networks:
+      - default
+    # volumes:
+    #   - html:/var/www/html
+    ports:
+      - "9000:80"
+
+
+  # nginx:
+  #   container_name: nginx
+  #   # depends_on:
+  #     # - wordpress
+
+  #   build: requirements/nginx
+  #   restart: always
+  #   networks:
+  #     - default
+  #   ports:
+  #     - "8443:443"
+  #   volumes:
+  #     - html:/var/www/html
 
 
 
@@ -48,6 +60,13 @@ networks:
 
 
 volumes:
+  database:
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/opelser/Desktop/inception/database
+
+
   html:
     driver_opts:
       type: none

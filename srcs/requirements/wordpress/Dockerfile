@@ -1,3 +1,1 @@
-FROM wordpress
-
-EXPOSE 9000
+FROM 	wordpress:latest
