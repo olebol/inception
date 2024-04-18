@@ -19,4 +19,7 @@ logs:
 
 re: down up
 
-.PHONY: all up build down ps logs re
+prune:
+	docker system prune -a
+
+.PHONY: all up build down ps logs re prune
