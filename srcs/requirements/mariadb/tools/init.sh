@@ -9,20 +9,20 @@ if [ ! -d /run/mysqld ]; then
 	chown -R	mysql:mysql		/run/mysqld
 	chown -R	mysql:mysql		/var/lib/mysql
 
-	# Set root password
-	echo "SET PASSWORD = PASSWORD('$DB_ROOT_PASSWORD');"								| mysql
+	mysql_install_db
 
-	# Create database
-	echo "CREATE DATABASE IF NOT EXISTS '$DB_NAME';"									| mysql
+cat << EOF > init.sql
+	SET PASSWORD = PASSWORD('$DB_ROOT_PASSWORD');
 
-	# Create user
-	echo "CREATE USER IF NOT EXISTS '$DB_USERNAME'@'%' IDENTIFIED BY '$DB_PASSWORD';"	| mysql
+	CREATE DATABASE IF NOT EXISTS '$DB_NAME';
+	CREATE USER IF NOT EXISTS '$DB_USERNAME'@'%' IDENTIFIED BY '$DB_PASSWORD';
+	GRANT ALL ON '$DB_NAME'.* TO '$DB_USERNAME'@'%';
 
-	# Grant user required privileges
-	echo "GRANT ALL ON '$DB_NAME'.* TO '$DB_USERNAME'@'%';"								| mysql
+	FLUSH PRIVILEGES;
+EOF
 
-	# Reload SQL privileges to update what we did
-	echo "FLUSH PRIVILEGES;"															| mysql
+	mysqld --bootstrap < init.sql
+
 fi
 
 # Run mariaDB in the foreground
