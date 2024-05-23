@@ -11,17 +11,15 @@ if [ ! -d /run/mysqld ]; then
 
 	mysql_install_db
 
-cat << EOF > init.sql
+mysqld --bootstrap << EOF
 	SET PASSWORD = PASSWORD('$DB_ROOT_PASSWORD');
 
-	CREATE DATABASE IF NOT EXISTS '$DB_NAME';
+	CREATE DATABASE IF NOT EXISTS \`$DB_NAME\`;
 	CREATE USER IF NOT EXISTS '$DB_USERNAME'@'%' IDENTIFIED BY '$DB_PASSWORD';
-	GRANT ALL ON '$DB_NAME'.* TO '$DB_USERNAME'@'%';
+	GRANT ALL ON \`$DB_NAME\`.* TO '$DB_USERNAME'@'%';
 
 	FLUSH PRIVILEGES;
 EOF
-
-	mysqld --bootstrap < init.sql
 
 fi
 
