@@ -11,15 +11,14 @@ if [ ! -d /run/mysqld ]; then
 
 	mysql_install_db
 
-mysqld --bootstrap << EOF
-	SET PASSWORD = PASSWORD('$DB_ROOT_PASSWORD');
+	service mariadb start;
 
-	CREATE DATABASE IF NOT EXISTS \`$DB_NAME\`;
-	CREATE USER IF NOT EXISTS '$DB_USERNAME'@'%' IDENTIFIED BY '$DB_PASSWORD';
-	GRANT ALL ON \`$DB_NAME\`.* TO '$DB_USERNAME'@'%';
+	mysql -e "CREATE DATABASE IF NOT EXISTS \`$DB_NAME\`;"
+	mysql -e "CREATE USER IF NOT EXISTS '$DB_USER'@'%' IDENTIFIED BY '$DB_PASS';"
+	mysql -e "GRANT ALL ON \`$DB_NAME\`.* TO '$DB_USER'@'%';"
+	mysql -e "FLUSH PRIVILEGES;"
 
-	FLUSH PRIVILEGES;
-EOF
+	service mariadb stop;
 
 fi
 
