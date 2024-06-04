@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Set the working directory
+cd /var/www/html
+
 # Install WordPress
 if [ -f wp-login.php ]
 then

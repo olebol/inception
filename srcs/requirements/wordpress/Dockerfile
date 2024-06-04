@@ -1,5 +1,7 @@
 FROM 	debian:bullseye
 
+EXPOSE 	9000
+
 RUN 	apt update -y
 
 # Install the required packages
