@@ -20,7 +20,7 @@ logs:
 re: down up
 
 it:
-	docker exec -it wordpress bash
+	docker exec -it nginx bash
 
 prune:
 	docker system prune -a
