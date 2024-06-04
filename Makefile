@@ -19,6 +19,9 @@ logs:
 
 re: down up
 
+it:
+	docker exec -it wordpress bash
+
 prune:
 	docker system prune -a
 

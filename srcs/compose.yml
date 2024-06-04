@@ -14,25 +14,20 @@ services:
     volumes:
       - database:/var/lib/mysql
 
-  # wordpress:
-  #   container_name: wordpress
-  #   depends_on:
-  #     - mariadb
-  #   env_file: .env
-  #   environment:
-  #     - WORDPRESS_DB_HOST=mariadb:3306
-  #     - WORDPRESS_DB_NAME=$DB_NAME
-  #     - WORDPRESS_DB_USER=$DB_USER
-  #     - WORDPRESS_DB_PASSWORD=$DB_PASSWORD
+  wordpress:
+    container_name: wordpress
+    depends_on:
+      - mariadb
+    env_file: .env
 
-  #   build: requirements/wordpress
-  #   restart: always
-  #   networks:
-  #     - default
-  #   # volumes:
-  #   #   - html:/var/www/html
-  #   ports:
-  #     - "9000:80"
+    build: requirements/wordpress
+    restart: always
+    networks:
+      - default
+    volumes:
+      - html:/var/www/html
+    ports:
+      - "9000:80"
 
 
   # nginx:
