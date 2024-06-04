@@ -24,8 +24,8 @@ services:
     restart: always
     networks:
       - default
-    volumes:
-      - html:/var/www/html
+    # volumes:
+    #   - html:/var/www/html
     ports:
       - "9000:80"
 
@@ -59,8 +59,8 @@ volumes:
       device: /home/opelser/Desktop/inception/database
 
 
-  html:
-    driver_opts:
-      type: none
-      o: bind
-      device: /home/opelser/Desktop/inception/html
+  # html:
+  #   driver_opts:
+  #     type: none
+  #     o: bind
+  #     device: /home/opelser/Desktop/inception/html

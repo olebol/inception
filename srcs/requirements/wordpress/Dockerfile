@@ -20,6 +20,7 @@ RUN 	mv		wp-cli.phar				\
 
 # Make run dir
 RUN 	mkdir -p /run/php
+RUN 	mkdir -p /var/www/html
 
 # Copy the script to install WordPress
 COPY 	tools/wp-install.sh .
