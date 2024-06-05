@@ -11,14 +11,14 @@ if [ ! -d /run/mysqld ]; then
 
 	mysql_install_db
 
-	service mariadb start;
-
-	mysql -e "CREATE DATABASE IF NOT EXISTS \`$DB_NAME\`;"
-	mysql -e "CREATE USER IF NOT EXISTS '$DB_USER'@'%' IDENTIFIED BY '$DB_PASS';"
-	mysql -e "GRANT ALL ON \`$DB_NAME\`.* TO '$DB_USER'@'%';"
-	mysql -e "FLUSH PRIVILEGES;"
-
-	service mariadb stop;
+	# Set up the database and the user
+	{
+		echo "FLUSH PRIVILEGES;"
+		echo "CREATE DATABASE IF NOT EXISTS \`$DB_NAME\`;"
+		echo "CREATE USER IF NOT EXISTS $DB_USER@'%' IDENTIFIED BY '$DB_PASS';"
+		echo "GRANT ALL ON \`$DB_NAME\`.* TO $DB_USER@'%';"
+		echo "FLUSH PRIVILEGES;"
+	} | mysqld --bootstrap
 
 fi
 
