@@ -47,7 +47,20 @@ wp core install 							\
 		--admin_password=$WP_ADMIN_PASS		\
 		--admin_email=$WP_ADMIN_MAIL		\
 		--skip-email						\
-		--allow-root						
+		--allow-root
+
+# Set up the user
+wp user create $WP_USER $WP_MAIL			\
+		--path="/var/www/html"				\
+		--user_pass=$WP_PASS				\
+		--role=editor						\
+		--allow-root
+
+# Activate the theme
+echo "Activating the theme..."
+wp theme activate twentytwentytwo			\
+		--path="/var/www/html"				\
+		--allow-root
 
 echo "executing php-fpm7.4..."
 exec php-fpm7.4 -F -R
