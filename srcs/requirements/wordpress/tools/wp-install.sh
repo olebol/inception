@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Wait for MariaDB to be ready
+echo "Waiting for MariaDB to be ready..."
+while ! mysqladmin ping -h $DB_HOST --silent;
+do
+	sleep 1
+	echo Checking...
+done
+
 # Set the working directory
 cd /var/www/html
 
