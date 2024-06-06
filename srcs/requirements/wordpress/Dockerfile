@@ -15,7 +15,7 @@ RUN 	apt install -y					\
 RUN 	wget "https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar"
 
 # Copy the php-fpm configuration file
-COPY 	tools/www.conf /etc/php/7.4/fpm/pool.d/www.conf
+COPY 	conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
 
 # Make the file executable and move it to the bin directory to use it globally
 RUN 	chmod +x wp-cli.phar
