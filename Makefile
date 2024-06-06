@@ -20,6 +20,6 @@ logs:
 re: down up
 
 env:
-	mv /home/opelser/data/.env srcs/
+	cp /home/opelser/data/.env srcs/
 
 .PHONY: all up build down ps logs re env
