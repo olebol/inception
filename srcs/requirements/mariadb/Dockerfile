@@ -6,7 +6,7 @@ RUN 	apt update -y &&				\
 		apt install mariadb-server -y
 
 # Copy the config file
-COPY 	tools/50-server.cnf				\
+COPY 	conf/50-server.cnf				\
 		/etc/mysql/mariadb.conf.d/
 
 # Copy the init script

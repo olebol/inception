@@ -8,7 +8,7 @@ RUN 	apt update -y &&				\
 		apt install -y openssl
 
 # Copy the config file
-COPY 	tools/default.conf				\
+COPY 	conf/default.conf				\
 		/etc/nginx/conf.d/
 
 # Generate the SSL certificate
