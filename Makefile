@@ -1,4 +1,4 @@
-COMPOSE_PATH		:=	srcs/compose.yml
+COMPOSE_PATH		:=	srcs/docker-compose.yml
 
 all: up
 
@@ -19,10 +19,4 @@ logs:
 
 re: down up
 
-it:
-	docker exec -it nginx bash
-
-prune:
-	docker system prune -a
-
-.PHONY: all up build down ps logs re prune
+.PHONY: all up build down ps logs re

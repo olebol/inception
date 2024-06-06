@@ -39,7 +39,7 @@ services:
     networks:
       - default
     ports:
-      - "8443:443"
+      - "443:443"
     volumes:
       - html:/var/www/html
 
@@ -55,11 +55,11 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/opelser/Desktop/inception/database
+      device: /home/opelser/data/database
 
 
   html:
     driver_opts:
       type: none
       o: bind
-      device: /home/opelser/Desktop/inception/html
+      device: /home/opelser/data/html
